@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException
 import random
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
+from mangum import Mangum
 
 
 class Book(BaseModel):
@@ -24,6 +25,7 @@ if os.path.exists(BOOKS_FILE):
 
 
 app = FastAPI()
+handler = Mangum(app)
 
 
 @app.get("/")
